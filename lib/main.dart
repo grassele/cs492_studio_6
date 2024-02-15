@@ -5,7 +5,6 @@ void main() {
 }
 
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -38,6 +37,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -48,8 +48,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
 
+class _MyHomePageState extends State<MyHomePage> {
 
   Map<String,String> forecast = {
     "name": "today",
@@ -77,6 +77,158 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Text(location["city"]!);
+    return Scaffold(
+      backgroundColor: Colors.lightBlue,
+    body: Center(child:
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LocationWidget(location: location),
+            TempWidget(forecast: forecast),
+            WeatherWidget(forecast: forecast),
+            WindRow(forecast: forecast),
+          ],
+        ),
+      ));
   }
 }
+
+
+class LocationWidget extends StatelessWidget {
+  const LocationWidget({
+    super.key,
+    required this.location,
+  });
+
+  final Map<String, String> location;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Text(
+        "${location["city"]}, ${location["state"]} ${location["zip"]}",
+        style: const TextStyle(color: Colors.white, fontSize: 30),
+      ),
+    );
+  }
+}
+
+
+class TempWidget extends StatelessWidget {
+  const TempWidget({
+    super.key,
+    required this.forecast,
+  });
+
+  final Map<String, String> forecast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text("${forecast["temperature"]}˚ F",
+        style: const TextStyle(color: Colors.white, fontSize: 75, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+
+class WeatherWidget extends StatelessWidget {
+  const WeatherWidget({
+    super.key,
+    required this.forecast,
+  });
+
+  final Map<String, String> forecast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(15.0),
+      color: Colors.white.withOpacity(.2),
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.cloudy_snowing, size: 75, color: Colors.white,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "${forecast["detailedForecast"]}",
+              style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w300),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class WindRow extends StatelessWidget {
+  const WindRow({
+    super.key,
+    required this.forecast,
+  });
+
+  final Map<String, String> forecast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Container(
+        color: Colors.white.withOpacity(.2),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WindIcon(),
+            WindText(forecast: forecast),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class WindText extends StatelessWidget {
+  const WindText({
+    super.key,
+    required this.forecast,
+  });
+
+  final Map<String, String> forecast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text("${forecast["windSpeed"]} mph ${forecast["windDirection"]}",
+        style: const TextStyle(color: Colors.white, fontSize: 22),
+      ),
+    );
+  }
+}
+
+
+class WindIcon extends StatelessWidget {
+  const WindIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Icon(
+        Icons.air, size: 50, color: Colors.white,
+      ),
+    );
+  }
+}
+
+
