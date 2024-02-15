@@ -1,16 +1,20 @@
 # studio_6_layout_challenge
 
-A new Flutter project.
 
-## Getting Started
+An in-class studio for week 6, working on the layout for the "weather" page of our weather app.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Forked Dan's repo: https://github.com/danwhite-osucascades/studio_6
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Set up a layout that displays the following:
+
+* Location
+    * city
+    * state
+    * zip
+
+* Current weather forecast
+    * temperature
+    * detailed forecast
+    * wind speed/direction
